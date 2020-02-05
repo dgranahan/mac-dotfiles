@@ -1,19 +1,15 @@
 # Load creds if available
 [[ -s ~/.creds ]] && source ~/.creds
 
-export JAVA_HOME=`/usr/libexec/java_home`
-export HADOOP_HOME=`brew --prefix hadoop`/libexec
-export HADOOP_CLASSPATH=$HADOOP_CLASSPATH:$HADOOP_HOME/share/hadoop/tools/lib/*
+export ANDROID_HOME=~/Library/Android/sdk
 
-# Update path
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
+# Update PATH
+export PATH="$PATH:$ANDROID_HOME/tools"
+export PATH="$PATH:$ANDROID_HOME/emulator"
 export PATH="$PATH:$ANDROID_HOME/platform-tools"
 
 # Bash completion
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
-fi
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 # Quickly query IPs from commandline
 geoip() {
@@ -34,3 +30,11 @@ parse_git_branch() {
 
 # Customize command prompt with git branch and status
 export PS1="\u \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\$(parse_git_status)\[\033[00m\] $ "
+
+# Add nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Add rvm to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
