@@ -11,6 +11,11 @@ export PATH="$PATH:$ANDROID_HOME/platform-tools"
 # Bash completion
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
+# Git aliases
+alias gb="git branch" # + branch name
+alias gc="git checkout" # + branch name
+alias gcb="git checkout -b" # + branch name
+
 # Quickly query IPs from commandline
 geoip() {
     curl ipinfo.io/$1
@@ -29,12 +34,12 @@ parse_git_branch() {
 }
 
 # Customize command prompt with git branch and status
-export PS1="\u \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\$(parse_git_status)\[\033[00m\] $ "
+export PS1="\u \[\033[32m\]\W\[\033[33m\]\$(parse_git_branch)\$(parse_git_status)\[\033[00m\] $ "
 
-# Add nvm
+# NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Add rvm to PATH for scripting. Make sure this is the last PATH variable change.
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
